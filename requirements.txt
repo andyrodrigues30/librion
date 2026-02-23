@@ -1,6 +1,10 @@
 fastapi[standard]
+uvicorn
+pytest
 pydantic
 pydantic_settings
 alembic
 sqlalchemy
 psycopg2-binary
+requests
+beautifulsoup4
