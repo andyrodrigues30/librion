@@ -1,0 +1,14 @@
+services:
+  librion-db:
+    image: postgres:16.4-alpine
+    restart: always
+    env_file:
+      - path: .env
+    ports:
+      - "5678:5432"
+    volumes:
+      - librion-db:/var/lib/postgresql/data/
+
+volumes:
+  librion-db:
+    driver: local
