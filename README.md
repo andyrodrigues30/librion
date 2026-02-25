@@ -23,42 +23,86 @@ It provides an intuitive web interface and a powerful API for managing books, bo
 - **User Roles:** Admin, Librarian, and Member access levels.
 - **REST API:** CRUD operations for books, borrowers, loans, and reservations with Swagger docs.
 
-## Installation
+## Setup
 
 ### Prerequisites
 
-- Docker & Docker Compose installed
-- Git installed
+- Docker (>= 20.x)
+- Docker Compose (>= 2.x)
+- Git (to clone the repository)
 
-### Clone the repository
+### Clone the repository and set up environment
 
 ```bash
+# Clone the repository
 git clone git@github.com:andyrodrigues30/librion.git
 cd librion
 
-# Copy the example environment file and update the `.env` file with your database credentials and secret keys
+# Copy example environment variables
 cp .env.example .env
+
+# Edit .env if needed
+nano .env
+
+Example .env contents:
+
+POSTGRES_DB=librionDB
+POSTGRES_USER=developer
+POSTGRES_PASSWORD=YourPasswordHere
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
 ```
 
-### Run in development
+*Make sure the database credentials match your setup.*
+
+### API & Frontend Dockerfiles
+
+#### API
+
+- Python 3.11
+- Uvicorn runs FastAPI
+- Migrations in production are run automatically
+
+#### Frontend
+
+- Node 20 (bullseye)
+- Development mode: live reload (npm run dev)
+- Production mode: build + start (npm run start)
+
+### Running the project
+
+#### Development
 
 ```bash
+# Start all services in dev mode
 docker compose up -d
 
-# generating new migration files
-docker compose exec api bash
-alembic revision --autogenerate -m "<add description>"
-# after updating migration script
-alembic upgrade head
+# Apply database migrations manually
+docker compose exec librion-api alembic upgrade head
+
+# Stop containers
+docker compose down
 ```
 
-### Run in production
+- Hot reload enabled for both API and frontend
+- Code changes in `api/` and `frontend/` will reflect automatically
+
+#### Production
 
 ```bash
-docker compose -f compose.yml -f compose.prod.yml up -d
+# start all services in production mode
+docker compose -f docker-compose.yml up -d
+
+# migrations are run automatically on container startup
+# check logs
+docker compose logs -f
 ```
 
-### Accessing in the browser/tools
+- Alembic migrations run automatically before API starts
+- Live reload is disabled
+- Uses built images, no volume mounts
+
+## Accessing in the browser/tools
 
 | Service  | Container Name | Container Port | Host Port |
 | -------- | -------------- | -------------- | --------- |
@@ -69,6 +113,36 @@ docker compose -f compose.yml -f compose.prod.yml up -d
 - Frontend: `http://localhost:7811`
 - Swagger API: `http://localhost:7815/docs`
 - Database: `localhost:5678`
+
+### Database Migrations (Alembic)
+
+#### Generate a new migration after model changes
+
+```bash
+docker compose exec api alembic revision --autogenerate -m "describe change"
+
+sudo chown -R user:user db/migrations
+
+docker compose exec api alembic upgrade head
+```
+
+Example: `add genre table`
+
+#### Apply migrations
+
+- Dev (manual):
+
+```bash
+docker compose exec librion-api alembic upgrade head
+```
+
+- Production (automatic via command in compose)
+
+#### Rollback a migration
+
+```bash
+docker compose exec librion-api alembic downgrade -1
+```
 
 ## Usage
 
