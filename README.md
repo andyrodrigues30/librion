@@ -77,9 +77,6 @@ POSTGRES_PORT=5432
 # Start all services in dev mode
 docker compose up -d
 
-# Apply database migrations manually
-docker compose exec librion-api alembic upgrade head
-
 # Stop containers
 docker compose down
 ```
@@ -111,7 +108,8 @@ docker compose logs -f
 | Next.js  | frontend       | 3000           | 7811      |
 
 - Frontend: `http://localhost:7811`
-- Swagger API: `http://localhost:7815/docs`
+- API: `http://localhost:7815`
+- Swagger Docs: `http://localhost:7815/docs`
 - Database: `localhost:5678`
 
 ### Database Migrations (Alembic)
@@ -119,11 +117,11 @@ docker compose logs -f
 #### Generate a new migration after model changes
 
 ```bash
-docker compose exec api alembic revision --autogenerate -m "describe change"
+docker compose exec librion-api alembic revision --autogenerate -m "describe change"
 
 sudo chown -R user:user db/migrations
 
-docker compose exec api alembic upgrade head
+docker compose exec librion-api alembic upgrade head
 ```
 
 Example: `add genre table`
