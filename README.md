@@ -1,9 +1,11 @@
 # Librion
->An open-source, self-hosted library management system designed for small to medium libraries.
+
+> An open-source, self-hosted library management system designed for small to medium libraries.
 
 It provides an intuitive web interface and a powerful API for managing books, borrowers, loans, reservations, and library analytics.
 
 ## Table of Contents
+
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
@@ -13,6 +15,7 @@ It provides an intuitive web interface and a powerful API for managing books, bo
 - [License](#license)
 
 ## Features
+
 - **Books Management:** Add, edit, delete, and categorize books; track availability.
 - **Borrowers Management:** Add members, track loans, overdue books, and fines.
 - **Loan & Reservation System:** Issue books, reserve unavailable books, automatic overdue notifications.
@@ -21,66 +24,82 @@ It provides an intuitive web interface and a powerful API for managing books, bo
 - **REST API:** CRUD operations for books, borrowers, loans, and reservations with Swagger docs.
 
 ## Installation
+
 ### Prerequisites
+
 - Docker & Docker Compose installed
 - Git installed
 
-### Steps
-1. Clone the repository:
+### Clone the repository
+
 ```bash
 git clone git@github.com:andyrodrigues30/librion.git
-
 cd librion
-````
 
-2. Copy the example environment file and update the `.env` file with your database credentials and secret keys.
-```bash
+# Copy the example environment file and update the `.env` file with your database credentials and secret keys
 cp .env.example .env
 ```
 
-3. Start the application:
+### Run in development
+
 ```bash
-docker-compose up -d
+docker compose up -d
+
+# generating new migration files
+docker compose exec backend bash
+alembic revision --autogenerate -m ""
+alembic upgrade head
 ```
 
-4. Access the application:
-	- Frontend: `http://localhost:7811`
-	- API: `http://localhost:7815/`
+### Run in production
+
+```bash
+docker compose -f compose.yml -f compose.prod.yml up -d
+```
+
+### Accessing in the browser/tools
+
+| Service  | Container Name | Container Port | Host Port |
+| -------- | -------------- | -------------- | --------- |
+| Postgres | db             | 5432           | 5678      |
+| FastAPI  | api            | 8000           | 7815      |
+| Next.js  | frontend       | 3000           | 7811      |
+
+- Frontend: `http://localhost:7811`
+- Swagger API: `http://localhost:7815/docs`
+- Database: `localhost:5678`
 
 ## Usage
+
 - Add books, authors, and categories through the frontend.
 - Register library members and manage loans.
 - Use the dashboard to view analytics and overdue statistics.
 - Access API endpoints for automation or integration with other systems.
 
-## API Documentation
-The FastAPI backend provides auto-generated Swagger documentation.
-- Visit: `http://localhost:7815/docs`
-
 ## Tech Stack
-**Backend:**
+
+### Backend
+
 - Python 3.11+
 - [FastAPI](https://fastapi.tiangolo.com/) – Web framework with automatic API docs
 - [Pydantic](https://pydantic-docs.helpmanual.io/) – Data validation
 - [SQLAlchemy](https://www.sqlalchemy.org/) – ORM for PostgreSQL
 - [Alembic](https://alembic.sqlalchemy.org/) – Database migrations
 
-**Database:**  
+### Database
+
 - [PostgreSQL](https://www.postgresql.org/) – Relational database
 
-**Frontend:**  
+### Frontend
+
 - [Next.js](https://nextjs.org/) (React)
 - [TypeScript](https://www.typescriptlang.org/)
 - [TailwindCSS](https://tailwindcss.com/)
 
-**Deployment:**
+### Deployment
+
 - Docker & Docker Compose for containerized setup
 
 ## License
-This project is licensed under the **GPL-3.0 License**. See the LICENSE file for details.
 
-## Future Enhancements
-- Barcode/QR code integration for books
-- Multi-library support
-- Analytics Dashboard: Monitor most borrowed books, active borrowers, and overdue statistics with charts and graphs
-- Mobile-friendly PWA or mobile version
+GPL-3.0
