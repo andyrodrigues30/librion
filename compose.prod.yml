@@ -4,11 +4,11 @@ services:
     container_name: librion-db
     restart: always
     env_file:
-      - path: .env
+      - .env
     ports:
       - "5678:5432"
     volumes:
-      - librion-db:/var/lib/postgresql/data/
+      - librion-db:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
       interval: 5s
@@ -24,28 +24,20 @@ services:
         condition: service_healthy
     env_file:
       - .env
-    volumes:
-      - .:/app
     ports:
       - "7815:8000"
     command: >
       sh -c "
       alembic upgrade head &&
-      uvicorn api.app:app --host 0.0.0.0 --port 8000 --reload
+      uvicorn api.app:app --host 0.0.0.0 --port 8000
       "
 
   frontend:
     build:
       context: ./frontend
-      target: dev
+      target: pro
     container_name: librion-frontend
     depends_on:
       - api
-    volumes:
-      - ./frontend:/app
     ports:
       - "7811:3000"
-
-volumes:
-  librion-db:
-    driver: local
