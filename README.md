@@ -120,8 +120,6 @@ docker compose logs -f
 docker compose exec librion-api alembic revision --autogenerate -m "describe change"
 
 sudo chown -R user:user db/migrations
-
-docker compose exec librion-api alembic upgrade head
 ```
 
 Example: `add genre table`
