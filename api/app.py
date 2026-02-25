@@ -1,7 +1,11 @@
 from fastapi import FastAPI
-from api.routes import book_routes, scraper_routes
+
+from api.routes import book, author, genre, format, scraper
 
 app = FastAPI(title="Books API")
 
-app.include_router(book_routes.router)
-app.include_router(scraper_routes.router)
+app.include_router(book.router)
+app.include_router(author.router)
+app.include_router(genre.router)
+app.include_router(format.router)
+app.include_router(scraper.router)
