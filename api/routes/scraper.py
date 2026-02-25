@@ -1,5 +1,6 @@
 from fastapi import APIRouter
-from api.services import scraper_services
+
+from api.services.scraper import get_gr_data
 
 
 router = APIRouter(prefix="/scraper", tags=["Scraper"])
@@ -7,8 +8,4 @@ router = APIRouter(prefix="/scraper", tags=["Scraper"])
 
 @router.get("/")
 def gr_book_data(URL: str):
-    return scraper_services.get_book_data(URL)
-
-
-
-
+    return get_gr_data(URL)

@@ -1,1 +1,4 @@
-from .book_models import Book
+from .book import Book
+from .author import Author
+from .genre import Genre
+from .format import Format
