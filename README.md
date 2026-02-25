@@ -46,8 +46,9 @@ cp .env.example .env
 docker compose up -d
 
 # generating new migration files
-docker compose exec backend bash
-alembic revision --autogenerate -m ""
+docker compose exec api bash
+alembic revision --autogenerate -m "<add description>"
+# after updating migration script
 alembic upgrade head
 ```
 
