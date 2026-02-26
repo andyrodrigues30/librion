@@ -1,4 +1,4 @@
-# Librion
+![Librion](./docs/logo.png)
 
 > An open-source, self-hosted library management system designed for small to medium libraries.
 
@@ -7,11 +7,10 @@ It provides an intuitive web interface and a powerful API for managing books, bo
 ## Table of Contents
 
 - [Features](#features)
+- [Setup](#setup)
+- [Container Access](#container-access)
+- [Database Migrations (Alembic)](#database-migrations-alembic)
 - [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Documentation](#api-documentation)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Features
@@ -53,7 +52,7 @@ POSTGRES_HOST=db
 POSTGRES_PORT=5432
 ```
 
-*Make sure the database credentials match your setup.*
+_Make sure the database credentials match your setup._
 
 ### API & Frontend Dockerfiles
 
@@ -99,7 +98,7 @@ docker compose logs -f
 - Live reload is disabled
 - Uses built images, no volume mounts
 
-## Accessing in the browser/tools
+## Container Access
 
 | Service  | Container Name | Container Port | Host Port |
 | -------- | -------------- | -------------- | --------- |
@@ -112,9 +111,9 @@ docker compose logs -f
 - Swagger Docs: `http://localhost:7815/docs`
 - Database: `localhost:5678`
 
-### Database Migrations (Alembic)
+## Database Migrations (Alembic)
 
-#### Generate a new migration after model changes
+### Generate a new migration after model changes
 
 ```bash
 docker compose exec librion-api alembic revision --autogenerate -m "describe change"
@@ -124,7 +123,7 @@ sudo chown -R user:user db/migrations
 
 Example: `add genre table`
 
-#### Apply migrations
+### Apply migrations
 
 - Dev (manual):
 
@@ -134,18 +133,11 @@ docker compose exec librion-api alembic upgrade head
 
 - Production (automatic via command in compose)
 
-#### Rollback a migration
+### Rollback a migration
 
 ```bash
 docker compose exec librion-api alembic downgrade -1
 ```
-
-## Usage
-
-- Add books, authors, and categories through the frontend.
-- Register library members and manage loans.
-- Use the dashboard to view analytics and overdue statistics.
-- Access API endpoints for automation or integration with other systems.
 
 ## Tech Stack
 
