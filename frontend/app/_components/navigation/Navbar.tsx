@@ -2,10 +2,12 @@
 
 import { JSX, useState } from "react";
 import Image from "next/image";
-import Logo from "@/public/logo.svg";
-import { NavLink } from "@/app/_types/Navbar";
+
 import { MobileDropdown, MobileMenuBtn } from "@/app/_components/navigation/MobileNavbar";
-import { ButtonProps } from "@/app/_types/Button";
+import { CTAButton } from "@/app/_components/inputs/buttons/CTAButton";
+import { NavLink } from "@/app/_types/Navbar";
+
+import Logo from "@/public/logo.svg";
 
 const navLinks: NavLink[] = [
   { name: "Browse", href: "/browse" },
@@ -39,8 +41,13 @@ export default function Navbar(): JSX.Element {
             ))}
           </div>
 
-          <div className="hidden md:block px-4">
-            <CTAButton text="Borrow" bgColor="#00AB97" textColor="#000" />
+          <div className="hidden md:block p-4">
+            <CTAButton
+              text="Borrow"
+              bgColor="#00AB97"
+              textColor="#000"
+              action={() => console.log("click")}
+            />
           </div>
 
           <MobileMenuBtn isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -51,14 +58,3 @@ export default function Navbar(): JSX.Element {
     </nav>
   );
 }
-
-export const CTAButton = ({ text, bgColor, textColor }: ButtonProps) => {
-  return (
-    <button
-      style={{ backgroundColor: bgColor, color: textColor }}
-      className="w-full mt-2 px-5 py-2 rounded-md"
-    >
-      {text}
-    </button>
-  );
-};

@@ -1,5 +1,5 @@
 import { NavLink } from "@/app/_types/Navbar";
-import { CTAButton } from "@/app/_components/navigation/Navbar";
+import { CTAButton } from "@/app/_components/inputs/buttons/CTAButton";
 
 export const MobileDropdown = ({ navLinks }: { navLinks: NavLink[] }) => {
   return (
@@ -15,7 +15,12 @@ export const MobileDropdown = ({ navLinks }: { navLinks: NavLink[] }) => {
           </a>
         ))}
 
-        <CTAButton text="Borrow" bgColor="#00AB97" textColor="#000" />
+        <CTAButton
+          text="Borrow"
+          bgColor="#00AB97"
+          textColor="#000"
+          action={() => console.log("click")}
+        />
       </div>
     </div>
   );
