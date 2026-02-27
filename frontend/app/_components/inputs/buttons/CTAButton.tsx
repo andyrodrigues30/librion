@@ -1,8 +1,13 @@
+import { ButtonProps } from "@/app/_types/Button";
 
-export default function CTAButton() {
+export const CTAButton = ({ text, bgColor, textColor, action }: ButtonProps) => {
   return (
-    <div className="">
-      
-    </div>
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      className="w-full px-8 py-2 rounded-md"
+      onClick={action}
+    >
+      {text}
+    </button>
   );
-}
+};
