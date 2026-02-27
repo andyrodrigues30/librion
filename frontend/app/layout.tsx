@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "./_components/Navbar";
+import Navbar from "@/app/_components/navigation/Navbar";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Librion",
