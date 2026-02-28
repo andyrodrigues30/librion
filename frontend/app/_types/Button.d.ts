@@ -1,4 +1,4 @@
-export interface ButtonProps {
+export interface CTAButtonProps {
   text: string;
   bgColor: string;
   textColor: string;

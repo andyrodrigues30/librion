@@ -1,6 +1,6 @@
-import { ButtonProps } from "@/app/_types/Button";
+import { CTAButtonProps } from "@/app/_types/Button";
 
-export const CTAButton = ({ text, bgColor, textColor, action }: ButtonProps) => {
+export const CTAButton = ({ text, bgColor, textColor, action }: CTAButtonProps) => {
   return (
     <button
       style={{ backgroundColor: bgColor, color: textColor }}
