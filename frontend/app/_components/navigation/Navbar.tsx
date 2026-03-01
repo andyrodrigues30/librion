@@ -23,7 +23,7 @@ export default function Navbar(): JSX.Element {
   return (
     <nav className="w-full bg-black sticky top-0 z-50">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between h-16 relative">
+        <div className="flex items-center justify-between h-22 relative">
           <Image
             src={Logo}
             alt="Logo"
