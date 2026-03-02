@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/app/_components/navigation/Navbar";
 import "@/app/globals.css";
+import { BubblesBg } from "@/app/_components/BubblesBg";
 
 export const metadata: Metadata = {
   title: "Librion",
@@ -15,10 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
+      <body className="bg-[#000]">
+        <BubblesBg />
 
-        {children}
+        <div className="top-0 left-0 w-screen h-screen overflow-hidden absolute z-5">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
