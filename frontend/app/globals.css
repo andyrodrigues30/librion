@@ -3,3 +3,25 @@
 * {
   box-sizing: border-box;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 50%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #00000000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #00000071;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #00000071;
+}
