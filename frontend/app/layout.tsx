@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className="bg-[#000]">
         <BubblesBg />
 
-        <div className="top-0 left-0 w-screen h-screen overflow-hidden absolute z-5">
+        <div className="top-0 left-0 p-4 w-screen h-screen overflow-x-hidden overflow-y-auto absolute z-5">
           <Navbar />
           {children}
         </div>
