@@ -1,5 +1,7 @@
 "use client";
 
+import { BookCover } from "../BookCover";
+
 export const RecentlyAddedList = () => {
   const covers = Array.from({ length: 6 });
 
@@ -12,15 +14,9 @@ export const RecentlyAddedList = () => {
 
       <div className="flex max-w-[1250px] overflow-x-auto m-4">
         {covers.map((_, index) => {
-          return <BookCover key={index} />;
+          return <BookCover key={index} width={230} height={320} />;
         })}
       </div>
     </div>
-  );
-};
-
-const BookCover = () => {
-  return (
-    <div className="w-[230px] h-[320px] m-2 bg-[#202020] rounded-lg flex-shrink-0" />
   );
 };
